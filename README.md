@@ -22,3 +22,7 @@ This button opens a dialog that allows the user to choose their styling options.
 ## Refresh
 
 Newly created footnotes will revert to the Google default style.Use the "refresh" button to bring the document in line with the styling chosen in Footnote Stylist.
+
+## Font
+
+Footnote Stylist does not interfere with the way Google Docs styles interact with footnotes. If the font of the Normal style is changed, these changes will be reflected in the footnotes. Docs' default font size is 10pt. If footnotes revert to this on changing the Normal style, simply refresh the document from the Footnote Sylist menu.
