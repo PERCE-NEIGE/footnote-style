@@ -5,7 +5,7 @@ An add-on for Google Docs, written in Google Scripts, that allows footnotes to b
 - Font Size
 - Line spacing
 - Alignment
-- First line indent.
+- First line indent
 
 Without this add-on, applying the above to every footnote requires the user to highlight and change one footnote at a time.
 
