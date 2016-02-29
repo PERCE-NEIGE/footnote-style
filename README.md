@@ -17,7 +17,7 @@ Once installed, Footnote Stylist will appear under the "Add-Ons" menu. Footnote 
 
 ## Configure Styling
 
-This button opens a dialog that allows the user to choose their styling options. They then have the option of saving these options as a user-wide default, or simply updating the current document. There is also the option to restore the users saved defaults.
+This button opens a dialog that allows the user to choose their styling options. They then have the further option of saving these as a user-wide default, or simply updating the current document. There is also the option to restore the users saved defaults.
 
 ## Refresh
 
