@@ -226,6 +226,13 @@
     }
 
     function updateOptionsDialog(document_settings) {
+    
+        if (document_settings.size == null) {
+        document.getElementById('font_size').value = 10;
+        document.getElementById('line_spacing').value = 1;
+        document.getElementById('alignment').value = 'LEFT';
+        } else {
+        
         document.getElementById('font_size').value = document_settings.size;
         document.getElementById('line_spacing').value = document_settings.spacing;
         document.getElementById('alignment').value = document_settings.align;
@@ -234,6 +241,7 @@
         } else {
             $('#firstline').prop('checked', false);
         }
+       }
     }
     
     function blurUpdateButton() {
