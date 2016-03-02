@@ -73,6 +73,14 @@ function restoreUserDefault() {
     return user_default;
 }
 
+function noFootnotes() {
+  var ui = DocumentApp.getUi();
+
+  ui.alert(
+     "There don't seem to be any footnotes in the document. Please try adding one and run again.",
+      ui.ButtonSet.OK);
+}
+
 // Update document from the add-on menu
 
 function updateRefresh() {
@@ -80,7 +88,14 @@ function updateRefresh() {
     var SPACING_doc = documentProperties.getProperty('SPACING_doc');
     var ALIGN_doc = documentProperties.getProperty('ALIGN_doc');
     var INDENTED_doc = documentProperties.getProperty('INDENTED_doc');
-
+  
+    var length = footnote.length
+    Logger.log(length)
+    
+    if (length == "0.0") {
+      noFootnotes()
+    }
+      
     if (INDENTED_doc == "true") {
         var indent = Number(SIZE_doc * 2.5);
     } else {
@@ -101,7 +116,7 @@ function updateRefresh() {
             par[j].setAlignment(DocumentApp.HorizontalAlignment[ALIGN_doc]);
             par[j].setIndentFirstLine(indent)
         }
-    }
+  }
 }
 
 // Update document from the options dialog (first sets new document properties)
@@ -113,4 +128,10 @@ function updateDocument(size, spacing, align, indented) {
     documentProperties.setProperty('INDENTED_doc', indented);
   
     updateRefresh();
+}
+
+function clearProps() {
+  documentProperties.deleteProperty('SIZE_doc');
+  documentProperties.deleteProperty('SPACING_doc');
+  documentProperties.deleteProperty('ALIGN_doc');  
 }
