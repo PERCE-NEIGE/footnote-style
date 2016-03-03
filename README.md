@@ -1,5 +1,7 @@
 # Footnote Stylist
 
+**If the menu options do not appear in a shared document, please go to "Add-Ons" --> "Manage Add-Ons", click the "Manage" button for Footnote Stylist and choose "Use in this document". You may need to refresh the document.**
+
 An add-on for Google Docs, written in Google Scripts, that allows footnotes to be styled in one go. The styling options are:
 
 - Font Size
