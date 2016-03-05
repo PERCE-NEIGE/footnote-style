@@ -17,11 +17,11 @@ Footnote Stylist is available free of charge in the Google Add-Ons store, which 
 
 Once installed, Footnote Stylist will appear under the "Add-ons" menu. Footnote Stylist provides two buttons: "Configure Styling" and "Refresh".
 
-## Configure Styling
+### Configure Styling
 
 This button opens a dialog that allows the user to choose their styling options. They then have the further option of saving these as a user-wide default, or simply updating the current document. There is also the option to restore the users saved defaults. Currently, new documents still need to be configured, but user defaults can be applied by using the "Restore Default" button in the "Configure Styling" dialog.
 
-## Refresh
+### Refresh
 
 Newly created footnotes will revert to the Google default style. Use the "refresh" button to bring the document in line with the styling chosen in Footnote Stylist.
 
