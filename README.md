@@ -1,6 +1,6 @@
 # Footnote Stylist
 
-## Install (here)[https://chrome.google.com/webstore/detail/footnote-stylist/hlcpimnopaolddjgmgjeibnhgkgbnbai?utm_source=permalink]
+### Install <a href="https://chrome.google.com/webstore/detail/footnote-stylist/hlcpimnopaolddjgmgjeibnhgkgbnbai?utm_source=permalink">here</a>
 
 An add-on for Google Docs that allows footnotes to be styled in one go. The styling options are:
 
