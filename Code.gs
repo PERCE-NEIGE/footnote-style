@@ -1,4 +1,8 @@
 // Create Footnote Stylist sub-menu menu in the add-on menu
+function onInstall(e) {
+    onOpen(e);
+}
+
 function onOpen(e) {
     DocumentApp.getUi().createAddonMenu()
         .addItem('Configure Styling', 'showDialog')
@@ -6,51 +10,17 @@ function onOpen(e) {
         .addToUi();
 }
 
-function onInstall(e) {
-    onOpen(e);
-}
 
 // Open options dialog from add-on menu
 
 function showDialog() {
 
-    var userProperties = PropertiesService.getUserProperties();
-    var documentProperties = PropertiesService.getDocumentProperties();
-
-    var SIZE_doc = documentProperties.getProperty('SIZE_doc');
-    var SPACING_doc = documentProperties.getProperty('SPACING_doc');
-    var ALIGN_doc = documentProperties.getProperty('ALIGN_doc');
-    var INDENTED_doc = documentProperties.getProperty('INDENTED_doc');
-
-    var SIZE_user = userProperties.getProperty('SIZE_user');
-    var SPACING_user = userProperties.getProperty('SPACING_user');
-    var ALIGN_user = userProperties.getProperty('ALIGN_user');
-    var INDENTED_user = userProperties.getProperty('INDENTED_user');
-
-    if (SIZE_doc == null) {
-        if (SIZE_user == null) {
-            documentProperties.setProperty('SIZE_doc', 10);
-            documentProperties.setProperty('SPACING_doc', 1);
-            documentProperties.setProperty('ALIGN_doc', 'LEFT');
-            documentProperties.setProperty('INDENTED_doc', 'false');
-        } else {
-            documentProperties.setProperty('SIZE_doc', SIZE_user);
-            documentProperties.setProperty('SPACING_doc', SPACING_user);
-            documentProperties.setProperty('ALIGN_doc', ALIGN_user);
-            documentProperties.setProperty('INDENTED_doc', INDENTED_user);
-        }
-    };
-
-    var SIZE_doc = documentProperties.getProperty('SIZE_doc');
-    var SPACING_doc = documentProperties.getProperty('SPACING_doc');
-    var ALIGN_doc = documentProperties.getProperty('ALIGN_doc');
-    var INDENTED_doc = documentProperties.getProperty('INDENTED_doc');
-
     var html = HtmlService.createHtmlOutputFromFile('dialog')
         .setSandboxMode(HtmlService.SandboxMode.IFRAME)
         .setWidth(330)
         .setHeight(228);
-    DocumentApp.getUi().showModalDialog(html, 'Footnote Stylist');
+    DocumentApp.getUi()
+        .showModalDialog(html, 'Footnote Stylist')
 }
 
 // Interact with saved style settings
@@ -59,17 +29,19 @@ function getDocumentSettings() {
 
     var documentProperties = PropertiesService.getDocumentProperties();
 
-    var SIZE_doc = documentProperties.getProperty('SIZE_doc');
-    var SPACING_doc = documentProperties.getProperty('SPACING_doc');
-    var ALIGN_doc = documentProperties.getProperty('ALIGN_doc');
-    var INDENTED_doc = documentProperties.getProperty('INDENTED_doc');
-
+    if (documentProperties.getProperty('SIZE_doc') == null) {
+        documentProperties.setProperty('SIZE_doc', "10.0");
+        documentProperties.setProperty('SPACING_doc', "1.0");
+        documentProperties.setProperty('ALIGN_doc', 'LEFT');
+        documentProperties.setProperty('INDENTED_doc', 'false')
+    }
     var document_settings = {
-        size: SIZE_doc,
-        spacing: SPACING_doc,
-        align: ALIGN_doc,
-        indented: INDENTED_doc
+        size: documentProperties.getProperty('SIZE_doc'),
+        spacing: documentProperties.getProperty('SPACING_doc'),
+        align: documentProperties.getProperty('ALIGN_doc'),
+        indented: documentProperties.getProperty('INDENTED_doc')
     };
+
     return document_settings;
 }
 
@@ -77,10 +49,6 @@ function updateUserDefault(size, spacing, align, indented) {
 
     var userProperties = PropertiesService.getUserProperties();
 
-    var SIZE_user = userProperties.getProperty('SIZE_user');
-    var SPACING_user = userProperties.getProperty('SPACING_user');
-    var ALIGN_user = userProperties.getProperty('ALIGN_user');
-    var INDENTED_user = userProperties.getProperty('INDENTED_user');
     userProperties.setProperty('SIZE_user', size);
     userProperties.setProperty('SPACING_user', spacing);
     userProperties.setProperty('ALIGN_user', align);
@@ -91,15 +59,11 @@ function restoreUserDefault() {
 
     var userProperties = PropertiesService.getUserProperties();
 
-    var SIZE_user = userProperties.getProperty('SIZE_user');
-    var SPACING_user = userProperties.getProperty('SPACING_user');
-    var ALIGN_user = userProperties.getProperty('ALIGN_user');
-    var INDENTED_user = userProperties.getProperty('INDENTED_user');
     var user_default = {
-        size: SIZE_user,
-        spacing: SPACING_user,
-        align: ALIGN_user,
-        indented: INDENTED_user
+        size: userProperties.getProperty('SIZE_user'),
+        spacing: userProperties.getProperty('SPACING_user'),
+        align: userProperties.getProperty('ALIGN_user'),
+        indented: userProperties.getProperty('INDENTED_user')
     };
     return user_default;
 }
@@ -108,7 +72,7 @@ function noFootnotes() {
     var ui = DocumentApp.getUi();
 
     ui.alert(
-        "There don't seem to be any footnotes in the document. Please try adding one and run again.",
+        "There don't seem to be any footnotes in the document.\nPlease try adding one and run again.",
         ui.ButtonSet.OK);
 }
 
@@ -116,7 +80,7 @@ function noConfig() {
     var ui = DocumentApp.getUi();
 
     ui.alert(
-        "You appear not to have configured styling for this document. Please try configuring styling and try again.",
+        "You appear not to have configured styling for this document.\nPlease try configuring styling and try again.",
         ui.ButtonSet.OK);
 }
 
@@ -142,7 +106,7 @@ function updateRefresh() {
         noFootnotes()
     }
 
-    if (SIZE_user == null && SIZE_doc == null) {
+    if (SIZE_doc == null) {
         noConfig()
     } else {
 
@@ -174,14 +138,7 @@ function updateRefresh() {
 
 function updateDocument(size, spacing, align, indented) {
 
-
     var documentProperties = PropertiesService.getDocumentProperties();
-
-    var SIZE_doc = documentProperties.getProperty('SIZE_doc');
-    var SPACING_doc = documentProperties.getProperty('SPACING_doc');
-    var ALIGN_doc = documentProperties.getProperty('ALIGN_doc');
-    var INDENTED_doc = documentProperties.getProperty('INDENTED_doc');
-
 
     documentProperties.setProperty('SIZE_doc', size);
     documentProperties.setProperty('SPACING_doc', spacing);
@@ -191,17 +148,19 @@ function updateDocument(size, spacing, align, indented) {
     updateRefresh();
 }
 
+// For testing purposes only
+
 function clearProps() {
     var documentProperties = PropertiesService.getDocumentProperties();
     var userProperties = PropertiesService.getUserProperties();
 
-    documentProperties.deleteProperty('SIZE_doc');
-    documentProperties.deleteProperty('SPACING_doc');
-    documentProperties.deleteProperty('ALIGN_doc');
-    documentProperties.deleteProperty('INDENTED_doc');
+    documentProperties.deleteAllProperties()
+    userProperties.deleteAllProperties()
+}
 
-    userProperties.deleteProperty('SIZE_user');
-    userProperties.deleteProperty('SPACING_user');
-    userProperties.deleteProperty('ALIGN_user');
-    userProperties.deleteProperty('INDENTED_user');
+function showProps() {
+    var props = PropertiesService.getDocumentProperties().getProperties();
+    var propsu = PropertiesService.getUserProperties().getProperties();
+    Logger.log(props);
+    Logger.log(propsu);
 }
