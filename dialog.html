@@ -1,5 +1,9 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <base target="_top">
 <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <style>
        
     .styled-select select {
@@ -18,15 +22,17 @@
     }
     
     div.indent-first-line {
-        float: left;
-        padding-top: 15px;
-        margin-left: -7px;
+        clear: both;
+        position: absolute;
+        top: 80px;
+        right: 180px;
+        width: 150px;
     }
     
     div.restore-button {
-        clear: both;
-        padding-top: 15px;
-        margin-left: -7px;
+        position: absolute;
+        top: 115px;
+        right: 227px;
     }
     
     div.bottom-button-update {
@@ -47,6 +53,8 @@
         right: 0px;
     }
 </style>
+</head>
+<body>
 
 <!-- Top row of buttons -->
 
@@ -60,35 +68,35 @@
                         &#8987;
                     </option>
 
-                    <option value="8">
+                    <option value="8.0">
                         8pt
                     </option>
 
-                    <option value="9">
+                    <option value="9.0">
                         9pt
                     </option>
 
-                    <option value="10">
+                    <option value="10.0">
                         10pt
                     </option>
 
-                    <option value="11">
+                    <option value="11.0">
                         11pt
                     </option>
 
-                    <option value="12">
+                    <option value="12.0">
                         12pt
                     </option>
 
-                    <option value="14">
+                    <option value="14.0">
                         14pt
                     </option>
 
-                    <option value="16">
+                    <option value="16.0">
                         16pt
                     </option>
 
-                    <option value="18">
+                    <option value="18.0">
                         18pt
                     </option>
                 </select>
@@ -105,7 +113,7 @@
                         &#8987;
                     </option>
 
-                    <option value="1">
+                    <option value="1.0">
                         Single
                     </option>
 
@@ -117,7 +125,7 @@
                         1.5
                     </option>
 
-                    <option value="2">
+                    <option value="2.0">
                         Double
                     </option>
                 </select>
@@ -188,14 +196,34 @@
     </div>
 </div>
 
-
+</body>
 
 <!-- Javascript -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 
-    google.script.run.withSuccessHandler(updateOptionsDialog).getDocumentSettings();
+    $(function () {
+    google.script.run
+      .withSuccessHandler(updateOptionsDialog)
+      .getDocumentSettings();
+    });
+    
+    function updateOptionsDialog(document_settings) {
+        
+        document.getElementById('font_size').value = document_settings.size;
+        document.getElementById('line_spacing').value = document_settings.spacing;
+        document.getElementById('alignment').value = document_settings.align;
+        
+        if (document_settings.indented == 'true') {
+            $('#firstline').prop('checked', true);
+        } else {
+            $('#firstline').prop('checked', false);
+        }
+    }
+   
+    function blurUpdateButton() {
+        document.getElementById('update').blur();
+    }
     
     function changeDefaultButton() {
         document.getElementById('user_default').innerHTML = "Saved as Default";
@@ -224,22 +252,6 @@
     function revertRestoreButton() {
         document.getElementById('user_default_restore').disabled = false;
     }
-
-    function updateOptionsDialog(document_settings) {
-    
-        document.getElementById('font_size').value = document_settings.size;
-        document.getElementById('line_spacing').value = document_settings.spacing;
-        document.getElementById('alignment').value = document_settings.align;
-        
-        if (document_settings.indented == 'true') {
-            $('#firstline').prop('checked', true);
-        } else {
-            $('#firstline').prop('checked', false);
-        }
-    }
-    
-    function blurUpdateButton() {
-        document.getElementById('update').blur();
-    }
       
 </script>
+</html>
