@@ -20,7 +20,7 @@ function showDialog() {
         .setWidth(330)
         .setHeight(228);
     DocumentApp.getUi()
-        .showModalDialog(html, 'Footnote Stylist')
+        .showModalDialog(html, 'Configure footnote styling')
 }
 
 // Interact with saved style settings
@@ -80,7 +80,7 @@ function noConfig() {
     var ui = DocumentApp.getUi();
 
     ui.alert(
-        "You appear not to have configured styling for this document.\nPlease try configuring styling and try again.",
+        "You appear not to have configured styling for this document.\nPlease try configuring styling and run again.",
         ui.ButtonSet.OK);
 }
 
