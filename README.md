@@ -1,30 +1,17 @@
-# Footnote Stylist
+# Footnote Style
 
 ### Install <a href="https://chrome.google.com/webstore/detail/footnote-stylist/hlcpimnopaolddjgmgjeibnhgkgbnbai?utm_source=permalink">here</a>
 
-An add-on for Google Docs that allows footnotes to be styled in one go. The styling options are:
+Footnote style allows you to change the style of all of your Google Docs footnotes at once. It works like Docs' own styles.
 
-- Font Size
-- Line spacing
-- Alignment
-- First line indent
+## Setting the style
 
-Without this add-on, applying the above to every footnote requires the user to highlight and change one footnote at a time.
+To set the footnote style you want, highlight an existing footnote or create one and style it in the way you want. Then, with the footnote still highlighted, go to 'Add-ons→Footnote Style→Update footnote style to match'. This will save your style settings and update all footnotes.
 
-## Installation
+New footnotes will revert to Google Docs' default style. Simply use the 'Refresh footnotes' option to re-apply your style to the document.
 
-Footnote Stylist is available free of charge in the Google Add-Ons store, which can be accessed from within a Google document by going to the "Add-ons" menu and selecting "Get add-ons..." or by clicking the link above.
+>NOTE: Attributes like text alignment apply to paragraphs, not text within paragraphs. For these to be picked up by Footnote Style, you must select an entire paragraph (this can be done by triple clicking the paragraph.
 
-Once installed, Footnote Stylist will appear under the "Add-ons" menu. Footnote Stylist provides two buttons: "Configure Styling" and "Refresh".
+## User defaults
 
-### Configure Styling
-
-This button opens a dialog that allows the user to choose their styling options. They then have the further option of saving these as a user-wide default, or simply updating the current document. There is also the option to restore the users saved defaults. Currently, new documents still need to be configured, but user defaults can be applied by using the "Restore Default" button in the "Configure Styling" dialog.
-
-### Refresh
-
-Newly created footnotes will revert to the Google default style. Use the "refresh" button to bring the document in line with the styling chosen in Footnote Stylist.
-
-## Font
-
-Footnote Stylist does not interfere with the way Google Docs styles interact with footnotes. If the font of the Normal style is changed, these changes will be reflected in the footnotes. Docs' default font size is 10pt. If footnotes revert to this on changing the Normal style, simply refresh the document from the Footnote Sylist menu.
+You can save a default footnote style for use in future documents from the footnote style menu.
